@@ -1,10 +1,10 @@
+// External Dependencies
 const AWS = require('aws-sdk');
 const express = require('express');
-const uuid = require('uuid');
+// const uuid = require('uuid');
 
 const IS_OFFLINE = process.env.NODE_ENV !== 'production';
 const EMPLOYEES_TABLE = process.env.TABLE;
-
 const dynamoDB = IS_OFFLINE
   ? new AWS.DynamoDB.DocumentClient({
     region: 'ap-northeast-1',
@@ -26,73 +26,72 @@ const dynamoDB = IS_OFFLINE
 
 const router = express.Router();
 
-router.get('/employees', (req, res) => {
+router.get('/articles', (req, res) => {
   const params = { TableName: EMPLOYEES_TABLE };
 
   dynamoDB.scan(params, (error, result) => {
-    if (error) res.status(400).json({ error: 'Error fetching the employees' });
+    if (error) res.status(400).json({ error: 'Error fetching the articles' });
     res.json(result.Items);
   });
 });
 
-router.get('/employees/:id', (req, res) => {
-  const { id } = req.params;
+router.get('/articles/:articleName', (req, res) => {
+  const { articleName } = req.params;
   const params = {
     TableName: EMPLOYEES_TABLE,
-    Key: { id },
+    Key: { articleName },
   };
 
   dynamoDB.get(params, (error, result) => {
-    if (error) res.status(400).json({ error: 'Error retrieving the employee' });
+    if (error) res.status(400).json({ error: 'Error retrieving the article' });
 
     if (result.Item) {
       res.json(result.Item);
     } else {
-      res.status(404).json({ error: `Employee with id: ${id} not found` });
+      res.status(404).json({ error: `Article with name: ${articleName} not found` });
     }
   });
 });
 
-router.post('/employees', (req, res) => {
-  const { name } = req.body;
-  const id = uuid.v4();
+router.post('/articles', (req, res) => {
+  const { articleName, articleText } = req.body;
   const params = {
     TableName: EMPLOYEES_TABLE,
-    Item: { id, name },
+    Item: { articleName, articleText },
   };
 
   dynamoDB.put(params, (error) => {
-    if (error) res.status(400).json({ error: 'Error creating the employee' });
-    res.json({ id, name });
+    if (error) res.status(400).json({ error: 'Error creating the article' });
+    res.json({ articleName, articleText });
   });
 });
 
-router.delete('/employees/:id', (req, res) => {
-  const { id } = req.params;
+router.delete('/articles/:articleName', (req, res) => {
+  const { articleName } = req.params;
   const params = {
     TableName: EMPLOYEES_TABLE,
-    Key: { id },
+    Key: { articleName },
   };
 
   dynamoDB.delete(params, (error) => {
-    if (error) res.status(400).json({ error: 'Error deleting the employee' });
+    if (error) res.status(400).json({ error: 'Error deleting the article' });
     res.json({ success: true });
   });
 });
 
-router.put('/employees', (req, res) => {
-  const { id, name } = req.body;
+router.put('/articles', (req, res) => {
+  const { articleName, articleText } = req.body;
   const params = {
     TableName: EMPLOYEES_TABLE,
-    Key: { id },
+    Key: { articleName },
     UpdateExpression: 'set #name = :name',
-    ExpressionAttributeNames: { '#name': 'name' },
-    ExpressionAttributeValues: { ':name': name },
+    ExpressionAttributeNames: { '#name': 'articleText' },
+    ExpressionAttributeValues: { ':name': articleText },
     ReturnValues: 'ALL_NEW',
   };
 
   dynamoDB.update(params, (error, result) => {
-    if (error) res.status(400).json({ error: 'Error updating the employee' });
+    if (error) res.status(400).json({ error: 'Error updating the article' });
     res.json(result.Attributes);
   });
 });
