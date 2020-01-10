@@ -1,0 +1,27 @@
+{
+  "TableName": "CoderEvolutionArticles",
+  "KeySchema": [
+    {
+      "AttributeName": "UserEmail",
+      "KeyType": "HASH"
+    },
+    {
+      "AttributeName": "ArticleName",
+      "KeyType": "RANGE"
+    }
+  ],
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "UserEmail",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "ArticleName",
+      "AttributeType": "S"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 1,
+    "WriteCapacityUnits": 1
+  }
+}

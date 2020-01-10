@@ -8,19 +8,7 @@ const EMPLOYEES_TABLE = process.env.TABLE;
 const dynamoDB = IS_OFFLINE
   ? new AWS.DynamoDB.DocumentClient({
     region: 'ap-northeast-1',
-    endpoint: `
-      <a
-        class="vglnk"
-        href="http://localhost:8081"
-        rel="nofollow"
-      >
-        <span>http</span>
-        <span>://</span>
-        <span>localhost</span>
-        <span>:</span>
-        <span>8081</span>
-      </a>
-    `,
+    endpoint: 'http://localhost:8080',
   })
   : new AWS.DynamoDB.DocumentClient();
 
@@ -28,6 +16,7 @@ const router = express.Router();
 
 router.get('/articles', (req, res) => {
   const params = { TableName: EMPLOYEES_TABLE };
+  console.log(params);
 
   dynamoDB.scan(params, (error, result) => {
     if (error) res.status(400).json({ error: 'Error fetching the articles' });
@@ -54,15 +43,25 @@ router.get('/articles/:articleName', (req, res) => {
 });
 
 router.post('/articles', (req, res) => {
-  const { articleName, articleText } = req.body;
+  const {
+    ArticleList,
+    ArticleName,
+    ArticleText,
+    UserEmail,
+  } = req.body;
   const params = {
     TableName: EMPLOYEES_TABLE,
-    Item: { articleName, articleText },
+    Item: {
+      ArticleList,
+      ArticleName,
+      ArticleText,
+      UserEmail,
+    },
   };
 
   dynamoDB.put(params, (error) => {
     if (error) res.status(400).json({ error: 'Error creating the article' });
-    res.json({ articleName, articleText });
+    res.json({ ArticleName, ArticleText });
   });
 });
 
