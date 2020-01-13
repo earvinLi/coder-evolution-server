@@ -6,19 +6,28 @@ const dynamoDB = require('../database');
 
 const ARTICLES_TABLE = process.env.TABLE;
 expressRouter.get('/:UserEmail', (req, res) => {
-  const { articleName } = req.params;
+  const { UserEmail } = req.params;
+
   const params = {
     TableName: ARTICLES_TABLE,
-    Key: { articleName },
+    KeyConditionExpression: 'UserEmail = :UserEmail',
+    ExpressionAttributeValues: { ':UserEmail': UserEmail },
+    ProjectionExpression: 'ArticleList',
   };
 
-  dynamoDB.get(params, (error, result) => {
-    if (error) res.status(400).json({ error: 'Error retrieving the article' });
+  dynamoDB.query(params, (error, result) => {
+    if (error) res.status(400).json({ error: `Fail to fetch the article lists. ${error.message}.` });
 
-    if (result.Item) {
-      res.json(result.Item);
+    if (result.Items) {
+      const articleLists = [];
+      result.Items.forEach((articleList) => {
+        const currentArticleList = articleList.ArticleList;
+        if (!articleLists.includes(currentArticleList)) articleLists.push(currentArticleList);
+      });
+
+      res.json(articleLists);
     } else {
-      res.status(404).json({ error: `Article with name: ${articleName} not found` });
+      res.status(404).json({ error: `Article of user: ${UserEmail} not found` });
     }
   });
 });
