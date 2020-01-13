@@ -1,0 +1,109 @@
+{
+  "CoderEvolutionArticles": [
+    {
+      "PutRequest": {
+        "Item": {
+          "UserEmail": {
+            "S": "earvin.tli@gmail.com"
+          },
+          "ArticleName": {
+            "S": "JavaScript Foundations"
+          },
+          "ArticleList": {
+            "S": "Week One"
+          },
+          "ArticleText": {
+            "S": "# JavaScript Foundations"
+          },
+          "CreatedDate": {
+            "S": "2020-01-13T12:28:58.451Z"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "UserEmail": {
+            "S": "earvin.tli@gmail.com"
+          },
+          "ArticleName": {
+            "S": "React Doc Takeaways"
+          },
+          "ArticleList": {
+            "S": "Week Two"
+          },
+          "ArticleText": {
+            "S": "# React Doc Takeaways"
+          },
+          "CreatedDate": {
+            "S": "2020-01-13T12:29:50.224Z"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "UserEmail": {
+            "S": "earvin.tli@gmail.com"
+          },
+          "ArticleName": {
+            "S": "MobX Doc Takeaways"
+          },
+          "ArticleList": {
+            "S": "Week Three"
+          },
+          "ArticleText": {
+            "S": "# MobX Doc Takeaways"
+          },
+          "CreatedDate": {
+            "S": "2020-01-13T12:31:19.636Z"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "UserEmail": {
+            "S": "earvin.tli@gmail.com"
+          },
+          "ArticleName": {
+            "S": "Testing Basics"
+          },
+          "ArticleList": {
+            "S": "Week Four"
+          },
+          "ArticleText": {
+            "S": "# Testing Basics"
+          },
+          "CreatedDate": {
+            "S": "2020-01-13T12:32:02.757Z"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "UserEmail": {
+            "S": "sacrednoone@gmail.com"
+          },
+          "ArticleName": {
+            "S": "About Redux Middleware"
+          },
+          "ArticleList": {
+            "S": "Week Two"
+          },
+          "ArticleText": {
+            "S": "# About Redux Middleware"
+          },
+          "CreatedDate": {
+            "S": "2020-01-13T12:33:59.186Z"
+          }
+        }
+      }
+    }
+  ]
+}

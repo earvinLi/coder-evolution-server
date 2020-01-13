@@ -10,7 +10,9 @@
     "clean": "rm build.zip",
     "build": "zip -r build.zip node_modules index.js app.js routes.js",
     "dynamodb-local-run": "docker-compose up",
-    "create-database": "aws dynamodb create-table --cli-input-json file://article-table-model.json --endpoint-url http://localhost:8080"
+    "create-database": "aws dynamodb create-table --cli-input-json file://article-table-model.json --endpoint-url http://localhost:8080",
+    "delete-database": "aws dynamodb delete-table --table-name CoderEvolutionArticles --endpoint-url http://localhost:8080",
+    "put-sample-data": "aws dynamodb batch-write-item --request-items file://article-test-data.json --endpoint-url http://localhost:8080"
   },
   "keywords": [],
   "author": "",
