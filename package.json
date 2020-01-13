@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "TABLE='CoderEvolutionArticles' node app-local",
+    "start": "TABLE='CoderEvolutionArticles' nodemon app-local.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "npm run clean && npm run build && aws2 lambda update-function-code --function-name coder-evolution-articles --zip-file fileb://build.zip --publish",
     "clean": "rm build.zip",
@@ -21,5 +21,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
