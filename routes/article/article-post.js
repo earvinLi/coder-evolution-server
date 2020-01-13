@@ -20,12 +20,13 @@ expressRouter.post('/', (req, res) => {
       ArticleList,
       ArticleName,
       ArticleText,
+      CreatedDate: new Date().toISOString(),
       UserEmail,
     },
   };
 
   dynamoDB.put(params, (error) => {
-    if (error) res.status(400).json({ error: 'Error creating the article' });
+    if (error) res.status(400).json({ error: `Fail to add the article. ${error.message}.` });
     res.json({ ArticleName, ArticleText });
   });
 });
