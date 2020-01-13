@@ -6,15 +6,24 @@ const dynamoDB = require('../../database');
 
 const ARTICLES_TABLE = process.env.TABLE;
 expressRouter.put('/', (req, res) => {
-  const { articleName } = req.params;
+  const {
+    ArticleName,
+    ArticleText,
+    UserEmail,
+  } = req.body;
+
   const params = {
     TableName: ARTICLES_TABLE,
-    Key: { articleName },
+    Key: { ArticleName, UserEmail },
+    UpdateExpression: 'set #name = :name',
+    ExpressionAttributeNames: { '#name': 'ArticleText' },
+    ExpressionAttributeValues: { ':name': ArticleText },
+    ReturnValues: 'ALL_NEW',
   };
 
-  dynamoDB.delete(params, (error) => {
-    if (error) res.status(400).json({ error: 'Error deleting the article' });
-    res.json({ success: true });
+  dynamoDB.update(params, (error, result) => {
+    if (error) res.status(400).json({ error: `Fail to update the article. ${error.message}.` });
+    res.json(result.Attributes);
   });
 });
 
