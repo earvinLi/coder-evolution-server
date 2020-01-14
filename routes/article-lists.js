@@ -25,7 +25,7 @@ expressRouter.get('/:UserEmail', (req, res) => {
         if (!articleLists.includes(currentArticleList)) articleLists.push(currentArticleList);
       });
 
-      res.json(articleLists);
+      res.json(articleLists.sort());
     } else {
       res.status(404).json({ error: `Article of user: ${UserEmail} not found` });
     }

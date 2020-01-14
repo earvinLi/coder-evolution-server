@@ -5,17 +5,26 @@ const expressRouter = require('express').Router();
 const dynamoDB = require('../database');
 
 const ARTICLES_TABLE = process.env.TABLE;
-expressRouter.get('/:UserEmail', (req, res) => {
-  const { UserEmail } = req.params;
+expressRouter.get('/:UserEmail/:ArticleList', (req, res) => {
+  const {
+    ArticleList,
+    UserEmail,
+  } = req.params;
+
   const params = {
     TableName: ARTICLES_TABLE,
     KeyConditionExpression: 'UserEmail = :UserEmail',
-    ExpressionAttributeValues: { ':UserEmail': UserEmail },
+    FilterExpression: 'ArticleList = :ArticleList',
+    ExpressionAttributeValues: {
+      ':ArticleList': ArticleList,
+      ':UserEmail': UserEmail,
+    },
+    ProjectionExpression: 'ArticleName',
   };
 
   dynamoDB.query(params, (error, result) => {
     if (error) res.status(400).json({ error: `Fail to fetch all the articles. ${error.message}.` });
-    res.json(result.Items);
+    res.json(result.Items.map((item) => item.ArticleName));
   });
 });
 

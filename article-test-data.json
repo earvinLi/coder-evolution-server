@@ -10,7 +10,7 @@
             "S": "JavaScript Foundations"
           },
           "ArticleList": {
-            "S": "Week One"
+            "S": "Core Skills"
           },
           "ArticleText": {
             "S": "# JavaScript Foundations"
@@ -28,10 +28,31 @@
             "S": "earvin.tli@gmail.com"
           },
           "ArticleName": {
+            "S": "ES6 Features"
+          },
+          "ArticleList": {
+            "S": "Core Skills"
+          },
+          "ArticleText": {
+            "S": "# ES6 Features"
+          },
+          "CreatedDate": {
+            "S": "2020-01-14T02:01:38.657Z"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "UserEmail": {
+            "S": "earvin.tli@gmail.com"
+          },
+          "ArticleName": {
             "S": "React Doc Takeaways"
           },
           "ArticleList": {
-            "S": "Week Two"
+            "S": "Powerful Weapons"
           },
           "ArticleText": {
             "S": "# React Doc Takeaways"
@@ -52,7 +73,7 @@
             "S": "MobX Doc Takeaways"
           },
           "ArticleList": {
-            "S": "Week Three"
+            "S": "Powerful Weapons"
           },
           "ArticleText": {
             "S": "# MobX Doc Takeaways"
@@ -73,7 +94,7 @@
             "S": "Testing Basics"
           },
           "ArticleList": {
-            "S": "Week Four"
+            "S": "World of Testing"
           },
           "ArticleText": {
             "S": "# Testing Basics"
@@ -94,7 +115,7 @@
             "S": "About Redux Middleware"
           },
           "ArticleList": {
-            "S": "Week Two"
+            "S": "Deep Thoughts"
           },
           "ArticleText": {
             "S": "# About Redux Middleware"
