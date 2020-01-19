@@ -10,7 +10,6 @@ expressRouter.post('/', (req, res) => {
   const {
     ArticleList,
     ArticleName,
-    ArticleText,
     UserEmail,
   } = req.body;
 
@@ -19,7 +18,7 @@ expressRouter.post('/', (req, res) => {
     Item: {
       ArticleList,
       ArticleName,
-      ArticleText,
+      ArticleText: "## Hi there! I'm your new article.\n\nYou can write anything here and the preview is on the right. When you are done, please click 'SAVE' at the very bottom right corner to save me.\n\nHave fun and cheers!\n\n---\n\nCheck this [doc](https://www.markdownguide.org/) if you have any problem working with Markdown syntaxes.\n",
       CreatedDate: new Date().toISOString(),
       UserEmail,
     },
@@ -27,7 +26,7 @@ expressRouter.post('/', (req, res) => {
 
   dynamoDB.put(params, (error) => {
     if (error) res.status(400).json({ error: `Fail to add the article. ${error.message}.` });
-    res.json({ ArticleName, ArticleText });
+    res.json({ ArticleList, ArticleName });
   });
 });
 
