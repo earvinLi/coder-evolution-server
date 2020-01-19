@@ -14,7 +14,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(awsServerlessExpressMiddleware.eventContext());
+app.use(awsServerlessExpressMiddleware.eventContext());
 
 // Routes Configurations
 app.use('/article', articleRoutes);
